@@ -4,7 +4,7 @@ node {
 
     docker.withRegistry('https://514991545313.dkr.ecr.us-west-2.amazonaws.com') {
       sh 'aws ecr get-login --no-include-email --region us-west-2 | sh'
-      def testImage = docker.build("battsnicknuovo/test-image:latest") 
+      def testImage = docker.build("nuovonick/test-image:latest") 
 
       testImage.inside {
           sh 'ls'
