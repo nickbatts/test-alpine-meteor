@@ -13,5 +13,6 @@ node {
     sh 'ls'
 
   stage ('Cleanup')
-      deleteDir()
+    deleteDir()
+    sh 'ls'
 }
