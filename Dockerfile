@@ -10,7 +10,12 @@ RUN apt-get update && apt-get install -y \
 	&& rm -rf /var/lib/apt/lists/* && \
     curl https://install.meteor.com/ | sh && \
 	curl -sL https://deb.nodesource.com/setup_8.x | sh && \
-	apt-get install -y nodejs && \
+	apt-get install -y nodejs && \  
+
+    # Clean up stuff that's no longer needed
+    apt-get autoclean && apt-get autoremove -y && apt-get clean && \
+
+    # Create user and add to sudoers
 	useradd --create-home --shell /bin/bash nick && \
     echo 'nick ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
     adduser nick sudo
