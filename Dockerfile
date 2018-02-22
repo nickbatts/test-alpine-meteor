@@ -6,15 +6,19 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     git \
+    sudo \
 	&& rm -rf /var/lib/apt/lists/* && \
+    curl https://install.meteor.com/ | sh && \
 	curl -sL https://deb.nodesource.com/setup_8.x | sh && \
 	apt-get install -y nodejs && \
-	useradd --create-home --shell /bin/bash nick
+	useradd --create-home --shell /bin/bash nick && \
+    echo 'nick ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    adduser nick sudo
 
 USER nick
 
-RUN mkdir /home/nick/app && \
-    curl https://install.meteor.com/ | sh
+RUN mkdir /home/nick/app
+    #sudo cp -R /root/.meteor $HOME/.meteor
 
 WORKDIR /home/nick/app
 
@@ -22,8 +26,11 @@ COPY src ./src
 
 WORKDIR /home/nick/app/src
 
-RUN	npm install --production
+RUN	sudo chown -R nick /home/nick && \
+    sudo npm install --production && \
+    meteor build ../build --directory && \
+    (cd ../build/bundle/programs/server && sudo npm install)
 
-RUN meteor build ../build --directory
+ENV PORT=3000 ROOT_URL=http://localhost:$PORT
 
 EXPOSE 3000
