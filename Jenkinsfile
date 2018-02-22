@@ -1,18 +1,10 @@
-pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile'
-    }
-    
-  }
-  stages {
-    stage('Build') {
-      steps {
-        sh '''#!/bin/bash
+node {
+  stage "Prepare environment"
+    checkout scm
 
-cd src/
-meteor build ../build --directory'''
-      }
+    def testImage = docker.build("test-image") 
+
+    testImage.inside {
+        sh 'meteor --version'
     }
-  }
 }
