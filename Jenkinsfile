@@ -1,11 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'node'
-      args '-u root:sudo'
-    }
-    
-  }
+  agent any
   stages {
     stage('Build') {
       steps {
