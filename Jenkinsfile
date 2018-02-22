@@ -2,7 +2,7 @@ node {
   stage ('Build')
     checkout scm
 
-    def testImage = docker.build("test-image") 
+    def testImage = docker.build("test-image:latest") 
 
     testImage.inside {
         sh 'ls'
@@ -11,6 +11,7 @@ node {
 
   stage ('Deploy')
     sh 'ls'
+    testImage.push('latest')
 
   stage ('Cleanup')
     deleteDir()
