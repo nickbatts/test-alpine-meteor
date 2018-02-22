@@ -1,5 +1,5 @@
 node {
-  stage "Prepare environment"
+  stage ('Build')
     checkout scm
 
     def testImage = docker.build("test-image") 
@@ -8,4 +8,7 @@ node {
         sh 'ls'
         sh 'echo $PORT'
     }
+
+  stage ('Deploy')
+    sh 'ls'
 }
