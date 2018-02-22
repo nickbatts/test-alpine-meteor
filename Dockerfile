@@ -7,14 +7,14 @@ RUN apt-get update && apt-get install -y \
     curl \
     git \
 	&& rm -rf /var/lib/apt/lists/* && \
-	curl https://install.meteor.com/ | sh && \
 	curl -sL https://deb.nodesource.com/setup_8.x | sh && \
 	apt-get install -y nodejs && \
 	useradd --create-home --shell /bin/bash nick
 
 USER nick
 
-RUN mkdir /home/nick/app
+RUN mkdir /home/nick/app && \
+    curl https://install.meteor.com/ | sh
 
 WORKDIR /home/nick/app
 
@@ -22,6 +22,8 @@ COPY src ./src
 
 WORKDIR /home/nick/app/src
 
-RUN	meteor npm install --save @babel/runtime
+RUN	npm install --production
+
+RUN meteor build ../build --directory
 
 EXPOSE 3000
