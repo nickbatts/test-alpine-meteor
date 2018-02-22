@@ -1,0 +1,13 @@
+{
+  "name": "src",
+  "version": "0.9.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.36",
+    "meteor-node-stubs": "^0.3.2"
+  }
+}
