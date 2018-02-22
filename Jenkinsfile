@@ -11,4 +11,7 @@ node {
 
   stage ('Deploy')
     sh 'ls'
+
+  stage ('Cleanup')
+      deleteDir()
 }
