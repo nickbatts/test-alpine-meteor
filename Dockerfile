@@ -18,7 +18,7 @@ RUN mkdir /home/nick/app
 
 WORKDIR /home/nick/app
 
-RUN meteor create src
+COPY src ./src
 
 WORKDIR /home/nick/app/src
 
