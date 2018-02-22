@@ -2,11 +2,15 @@ node {
   stage ('Build')
     checkout scm
 
-    def testImage = docker.build("test-image:latest") 
+    docker.withRegistry('514991545313.dkr.ecr.us-west-2.amazonaws.com') {
 
-    testImage.inside {
-        sh 'ls'
-        sh 'echo $PORT'
+      def testImage = docker.build("test-image:latest") 
+
+      testImage.inside {
+          sh 'ls'
+          sh 'echo $PORT'
+      }
+
     }
 
   stage ('Deploy')
