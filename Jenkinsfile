@@ -11,13 +11,13 @@ node {
           sh 'echo $PORT'
       }
 
+    stage ('Deploy')
+      sh 'ls'
+      testImage.push('latest')
+
+    stage ('Cleanup')
+      deleteDir()
+      sh 'ls'
+
     }
-
-  stage ('Deploy')
-    sh 'ls'
-    testImage.push('latest')
-
-  stage ('Cleanup')
-    deleteDir()
-    sh 'ls'
 }
