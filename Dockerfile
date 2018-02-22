@@ -36,6 +36,23 @@ RUN	sudo chown -R nick /home/nick && \
     meteor build ../build --directory && \
     (cd ../build/bundle/programs/server && sudo npm install)
 
+FROM node:alpine
+
+WORKDIR /app/
+
+COPY --from=0 /home/nick/app/build/* .
+
+# --no-cache: download package index on-the-fly, no need to cleanup afterwards
+# --virtual: bundle packages, remove whole bundle at once, when done
+RUN apk add --no-cache --virtual .gyp \
+        python \
+        make \
+        g++
+
+RUN (cd programs/server && npm install)
+
 ENV PORT=3000 ROOT_URL=http://localhost:$PORT
 
 EXPOSE 3000
+
+CMD [ "node", "main.js" ]
