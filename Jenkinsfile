@@ -5,6 +5,7 @@ node {
     def testImage = docker.build("test-image") 
 
     testImage.inside {
-        sh 'meteor --version'
+        sh 'ls'
+        sh 'echo $PORT'
     }
 }
