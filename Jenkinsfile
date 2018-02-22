@@ -2,7 +2,7 @@ node {
   stage ('Build')
     checkout scm
 
-    docker.withRegistry('https://514991545313.dkr.ecr.us-west-2.amazonaws.com') {
+    docker.withRegistry('https://514991545313.dkr.ecr.us-west-2.amazonaws.com/') {
 
       def testImage = docker.build("test-image:latest") 
 
