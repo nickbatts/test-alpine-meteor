@@ -32,7 +32,7 @@ COPY src ./src
 WORKDIR /home/nick/app/src
 
 RUN	sudo chown -R nick /home/nick && \
-    sudo npm install --production && \
+    sudo npm install && \
     meteor build ../build --directory && \
     (cd ../build/bundle/programs/server && sudo npm install)
 
@@ -49,7 +49,7 @@ RUN apk add --no-cache --virtual .gyp \
         make \
         g++
 
-RUN (cd programs/server && npm install)
+RUN (cd programs/server && npm install && npm install fibers)
 
 ENV PORT=3000 ROOT_URL=http://localhost:$PORT
 
