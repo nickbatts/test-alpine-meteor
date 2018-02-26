@@ -10,6 +10,7 @@ node {
       testImage.inside {
           sh 'ls'
           sh 'echo $PORT'
+          sh 'echo $WORKSPACE'
       }
 
     stage ('Deploy')
