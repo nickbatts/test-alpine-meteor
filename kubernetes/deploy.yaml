@@ -18,12 +18,14 @@ spec:
     app: demo-app
  
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: demo-app
 spec:
   replicas: 2
+  strategy:
+      type: RollingUpdate
   template:
     metadata:
       labels:
