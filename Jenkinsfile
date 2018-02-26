@@ -18,7 +18,7 @@ node {
       //devImage.push('dev')
 
     stage ('Cleanup')
-      //deleteDir()
+      deleteDir()
       sh 'ls'
 
     }
