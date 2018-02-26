@@ -23,7 +23,6 @@ RUN apt-get update && apt-get install -y \
 USER nick
 
 RUN mkdir /home/nick/app
-    #sudo cp -R /root/.meteor $HOME/.meteor
 
 WORKDIR /home/nick/app
 
@@ -33,8 +32,7 @@ WORKDIR /home/nick/app/src
 
 RUN	sudo chown -R nick /home/nick && \
     sudo npm install && \
-    meteor build ../build --directory && \
-    (cd ../build/bundle/programs/server && sudo npm install)
+    meteor build ../build --directory
 
 FROM node:alpine
 
@@ -45,9 +43,9 @@ COPY --from=0 /home/nick/app/build/* .
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
 # --virtual: bundle packages, remove whole bundle at once, when done
 RUN apk add --no-cache --virtual .gyp \
-        python \
-        make \
-        g++
+    python \
+    make \
+    g++
 
 RUN (cd programs/server && npm install && npm install fibers)
 
