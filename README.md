@@ -27,7 +27,7 @@ Base dockerfiles to build development and production meteor.js environments.
 
 * `docker ps -a` - confirm alpine meteor docker container is running
 
-* `nodetool status` - check cluster status and other nodes
+* `docker exec -it demo COMMAND` - run a command on running meteor container
 
 ## Authors
 

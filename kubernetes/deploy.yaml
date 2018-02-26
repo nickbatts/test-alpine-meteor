@@ -1,16 +1,36 @@
-apiVersion: extensions/v1beta1
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app
+  namespace: default
+  labels:
+    name: demo-app
+spec:
+  type: LoadBalancer    # default 'ClusterIP'
+  #clusterIP: None   # for Headless Services
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    # This needs to match the selector in the RC/Deployment
+    app: demo-app
+ 
+---
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-image
+  name: demo-app
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        app: test-image
+        app: demo-app
     spec:
       containers:
-        - name:  test-image
+        - name:  demo-app
           image: 514991545313.dkr.ecr.us-west-2.amazonaws.com/nuovonick/test-image:latest
           ports:
             - containerPort: 3000
