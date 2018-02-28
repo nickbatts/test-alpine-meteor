@@ -6,14 +6,11 @@ Base dockerfiles to build development and production meteor.js environments.
 
 * Docker 17.12.0-ce+ - For installation instructions go [here](https://docs.docker.com/install/).
 
-## QuickStart
+## Quick Start
 
 * Clone the repo: `git clone git@github.com:nickbatts/alpine-meteor && cd alpine-meteor/`
 
-* change key_name variable to name of your own key
-* `terraform plan` - check to make sure there are no mistakes
-* `terraform apply` - review and confirm resources to be created
-* `terraform destroy` - terminate instances and clean-up resources
+* `docker run --rm -d --name demo -P nickbatts/alpine-meteor` - Run alpine meteor docker image exposing random port on host
 
 ## Helpful Commands
 
@@ -21,9 +18,7 @@ Base dockerfiles to build development and production meteor.js environments.
 
 * `docker build --rm -f Dockerfile-dev github.com/nickbatts/alpine-meteor .` - Build development docker image from github
 
-* `docker build --rm -t github.com/nickbatts/alpine-meteor .` - Build docker image from Dockerfile
-
-* `docker run --rm -d --name demo -P nickbatts/alpine-meteor` - Run alpine meteor docker image exposing random port on host
+* `docker build --rm -t alpine-meteor:latest github.com/nickbatts/alpine-meteor .` - Build docker image from Dockerfile with new tag
 
 * `docker ps -a` - confirm alpine meteor docker container is running
 
@@ -32,3 +27,9 @@ Base dockerfiles to build development and production meteor.js environments.
 ## Authors
 
 * Nick Batts
+
+## License
+
+Copyright (c) 2018 Nick Batts
+
+This project is licensed under the terms of the MIT license.
