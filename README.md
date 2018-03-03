@@ -6,11 +6,13 @@ Base dockerfiles to build development and production meteor.js environments.
 
 * Docker 17.12.0-ce+ - For installation instructions go [here](https://docs.docker.com/install/).
 
+* [Meteor.js](https://www.meteor.com/) 1.6.1+
+
 ## Quick Start
 
 * Clone the repo: `git clone git@github.com:nickbatts/alpine-meteor && cd alpine-meteor/`
 
-* `docker run --rm -d --name demo -P nickbatts/alpine-meteor` - Run alpine meteor docker image exposing random port on host
+* `docker run --rm -d --name demo -v $(pwd)/src:/home/nick/app/src -P nickbatts/alpine-meteor` - Run alpine meteor docker image exposing random port on host
 
 ## Helpful Commands
 
@@ -23,6 +25,8 @@ Base dockerfiles to build development and production meteor.js environments.
 * `docker ps -a` - confirm alpine meteor docker container is running
 
 * `docker exec -it demo COMMAND` - run a command on running meteor container
+
+* `docker logs demo` - view meteor console outputs
 
 ## Authors
 

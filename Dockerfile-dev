@@ -1,5 +1,7 @@
 FROM ubuntu
 
+LABEL maintainer="github.com/nickbatts"
+
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
     apt-utils \
@@ -16,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 	apt-get install -y nodejs && \  
 
     # Clean up stuff that's no longer needed
-    apt-get autoclean && apt-get autoremove -y && apt-get clean && \
+    apt-get autoremove -y && apt-get clean && \
 
     # Create user and add to sudoers
 	useradd --create-home --shell /bin/bash nick && \
@@ -33,11 +35,8 @@ COPY src ./src
 
 WORKDIR /home/nick/app/src
 
-RUN	sudo chown -R nick /home/nick && \
-    sudo npm install && \
-    meteor build ../build --directory && \
-    (cd ../build/bundle/programs/server && sudo npm install && sudo npm install fibers)
+RUN	meteor npm install --save
 
 EXPOSE 3000
 
-CMD [ "/bin/bash" ]
+CMD [ "meteor" ]

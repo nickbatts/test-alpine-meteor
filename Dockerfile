@@ -1,11 +1,14 @@
 FROM ubuntu
 
 RUN apt-get update && apt-get install -y \
+    apt-transport-https \
+    apt-utils \
     aufs-tools \
     automake \
     build-essential \
     curl \
     git \
+    lsb-release \
     sudo \
     && rm -rf /var/lib/apt/lists/* && \
     curl https://install.meteor.com/ | sh && \
@@ -13,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     apt-get install -y nodejs && \  
 
     # Clean up stuff that's no longer needed
-    apt-get autoclean && apt-get autoremove -y && apt-get clean && \
+    apt-get autoremove -y && apt-get clean && \
 
     # Create user and add to sudoers
     useradd --create-home --shell /bin/bash nick && \
