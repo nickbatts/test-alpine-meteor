@@ -10,9 +10,9 @@ Base dockerfiles to build development and production meteor.js environments.
 
 ## Quick Start
 
-* Clone the repo: `git clone git@github.com:nickbatts/alpine-meteor && cd alpine-meteor/`
+1. Clone the repo: `git clone git@github.com:nickbatts/alpine-meteor && cd alpine-meteor/`
 
-* `docker run --rm -d --name demo -v $(pwd)/src:/home/nick/app/src -P nickbatts/alpine-meteor` - Run alpine meteor docker image exposing random port on host
+2. `docker run --rm -d --name demo -v $(pwd)/src:/home/nick/app/src -P nickbatts/alpine-meteor` - Run alpine meteor docker image exposing random port on host and mapping host src directory to src directory on container
 
 ## Helpful Commands
 
